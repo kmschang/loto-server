@@ -1189,9 +1189,9 @@ def create_pdf(json_path, output_pdf_path):
     for source in data.get("Sources", []):
         for key in ["IsolationPoint", "VerificationDevice"]:
             if key in source:
-                source[key] = os.path.join("app", "temp", source[key])
+                source[key] = os.path.join("temp", source[key])
     if "MachineImage" in data:
-        data["MachineImage"] = os.path.join("app", "temp", data["MachineImage"])
+        data["MachineImage"] = os.path.join("temp", data["MachineImage"])
 
     # Call original script logic using `data` and `output_pdf_path`
     # Replace your script's logic here if needed
