@@ -1178,27 +1178,6 @@ def generate_pdf_from_json(json_data: dict, output_path: str) -> bool:
     return True
 
 
-def create_pdf(json_path, output_pdf_path):
-    import os
-    import json
-
-    with open(json_path, 'r') as f:
-        data = json.load(f)
-
-    # Prepend 'temp/' to any image fields
-    for source in data.get("Sources", []):
-        for key in ["IsolationPoint", "VerificationDevice"]:
-            if key in source:
-                source[key] = os.path.join("temp", source[key])
-    if "MachineImage" in data:
-        data["MachineImage"] = os.path.join("temp", data["MachineImage"])
-
-    # Call original script logic using `data` and `output_pdf_path`
-    # Replace your script's logic here if needed
-    # For now, we'll assume the rest of your generate_pdf.py already knows how to use `data`
-
-    # You might need to redirect your existing code to accept `data` and `output_pdf_path`
-
 # Main function to run the PDF generation
 def main():
     json_filename = get_json_filename()
