@@ -1,4 +1,6 @@
 fastapi
 uvicorn
 reportlab
+PyPDF2
 icecream
+python-multipart
