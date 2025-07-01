@@ -15,7 +15,7 @@ RUN uv init --lib .
 RUN uv python pin 3.13.2
 RUN uv venv
 RUN uv pip install -e .
-RUN uv add icecream pillow uvicorn fastapi typing-extensions python-multipart PyPDF2 reportlab
+RUN uv add icecream pillow uvicorn fastapi typing-extensions python-multipart PyPDF2 reportlab requests
 
 COPY /app /app/src/loto
 
