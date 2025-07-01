@@ -146,6 +146,7 @@ DEFAULT_COLOR = [0, 0, 0]  # Black
 DEFAULT_FONT = 'Inter'
 DEFAULT_FONT_SIZE = 10
 DEFAULT_ROW_SPACING = 14
+DEFAULT_IMAGE = 'includes/ImageNotFound.jpg'  # Default image if none is provided
 
 
 def get_json_filename():
@@ -461,7 +462,12 @@ def add_machine_info(import_bottom: float = PAGE_MARGIN) -> float:
         row1_height = (row_spacing * 3)
 
     # Machine Image Formatting Options
-    machine_image_file = data.get('MachineImage', '')
+    if not data.get('MachineImage'):
+        # Case: key is missing, or value is ""
+        machine_image_file = DEFAULT_IMAGE
+    else:
+        # Case: key exists and has a non-empty string
+        machine_image_file = '../temp/' + data.get('MachineImage', '')
 
     h_line1 = import_bottom - DEFAULT_ROW_SPACING
     h_line2 = h_line1 - row_spacing
@@ -870,16 +876,26 @@ def add_source(source: dict, import_bottom: float, import_height: float) -> floa
         pdf.drawCentredString(column5_text, text_block_middle_width, blank_text)
 
     # Isolation Point
-    isolation_point_height, isolation_point_width = resize_image(source.get("IsolationPoint", default_image),
-                                                                 isolation_point_max_height, isolation_point_max_width)
-    pdf.drawImage(source.get("IsolationPoint", default_image), column3_image - (isolation_point_width / 2),
+    if not data.get('IsolationPoint'):
+        # Case: key is missing, or value is ""
+        isolaton_point_image_file = DEFAULT_IMAGE
+    else:
+        # Case: key exists and has a non-empty string
+        isolaton_point_image_file = '../temp/' + data.get('IsolationPoint', '')
+    isolation_point_height, isolation_point_width = resize_image(isolaton_point_image_file, isolation_point_max_height, isolation_point_max_width)
+    pdf.drawImage(isolaton_point_image_file, column3_image - (isolation_point_width / 2),
                   image_block_middle_width - (isolation_point_height / 2), isolation_point_width,
                   isolation_point_height)
 
     # Verification Device
-    verification_device_height, verification_device_width = resize_image(
-        source.get("VerificationDevice", default_image), verification_device_max_height, verification_device_max_width)
-    pdf.drawImage(source.get("VerificationDevice", default_image), column6_image - (verification_device_width / 2),
+    if not data.get('VerificationDevice'):
+        # Case: key is missing, or value is ""
+        verification_device_image_file = DEFAULT_IMAGE
+    else:
+        # Case: key exists and has a non-empty string
+        verification_device_image_file = '../temp/' + data.get('VerificationDevice', '')
+    verification_device_height, verification_device_width = resize_image(verification_device_image_file, verification_device_max_height, verification_device_max_width)
+    pdf.drawImage(verification_device_image_file, column6_image - (verification_device_width / 2),
                   image_block_middle_width - (verification_device_height / 2), verification_device_width,
                   verification_device_height)
 
