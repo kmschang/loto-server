@@ -876,24 +876,24 @@ def add_source(source: dict, import_bottom: float, import_height: float) -> floa
         pdf.drawCentredString(column5_text, text_block_middle_width, blank_text)
 
     # Isolation Point
-    if not data.get('IsolationPoint'):
+    if not source.get('IsolationPoint'):
         # Case: key is missing, or value is ""
         isolaton_point_image_file = DEFAULT_IMAGE
     else:
         # Case: key exists and has a non-empty string
-        isolaton_point_image_file = '../temp/' + data.get('IsolationPoint', '')
+        isolaton_point_image_file = '../temp/' + source.get('IsolationPoint', '')
     isolation_point_height, isolation_point_width = resize_image(isolaton_point_image_file, isolation_point_max_height, isolation_point_max_width)
     pdf.drawImage(isolaton_point_image_file, column3_image - (isolation_point_width / 2),
                   image_block_middle_width - (isolation_point_height / 2), isolation_point_width,
                   isolation_point_height)
 
     # Verification Device
-    if not data.get('VerificationDevice'):
+    if not source.get('VerificationDevice'):
         # Case: key is missing, or value is ""
         verification_device_image_file = DEFAULT_IMAGE
     else:
         # Case: key exists and has a non-empty string
-        verification_device_image_file = '../temp/' + data.get('VerificationDevice', '')
+        verification_device_image_file = '../temp/' + source.get('VerificationDevice', '')
     verification_device_height, verification_device_width = resize_image(verification_device_image_file, verification_device_max_height, verification_device_max_width)
     pdf.drawImage(verification_device_image_file, column6_image - (verification_device_width / 2),
                   image_block_middle_width - (verification_device_height / 2), verification_device_width,
